@@ -9,4 +9,21 @@
         exit();
     }
 
-    
+    include_once '../../config/Database.php';
+    include_once '../../models/Author.php';
+
+    $database = new Database();
+    $db = $database->connect();
+
+    $author = new Author($db);
+
+    $author->id = isset($_GET['id']) ? $_GET['id'] : die();
+
+    $result = $author->read_single($_GET['id']);
+    if ($result) {
+        echo json_encode($result);
+    } else {
+        echo json_encode(
+            array('message' => 'author_id Not Found')
+        );
+    }

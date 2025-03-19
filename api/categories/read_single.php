@@ -9,4 +9,21 @@
         exit();
     }
 
-    
+    include_once '../../config/Database.php';
+    include_once '../../models/Category.php';
+
+    $database = new Database();
+    $db = $database->connect();
+
+    $category = new Category($db);
+
+    $category->id = isset($_GET['id']) ? $_GET['id'] : die();
+
+    $result = $category->read_single($_GET['id']);
+    if ($result) {
+        echo json_encode($result);
+    } else {
+        echo json_encode(
+            array('message' => 'category_id Not Found')
+        );
+    }

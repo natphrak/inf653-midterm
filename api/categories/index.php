@@ -9,4 +9,28 @@
         exit();
     }
 
-    
+    include_once '../../config/Database.php';
+    include_once '../../models/Category.php';
+
+    $method = $_SERVER['REQUEST_METHOD'];
+
+    switch ($method) {
+        case 'GET':
+            if (isset($_GET['id'])) {
+                include 'read_single.php';
+            } else {
+                include 'read.php';
+            }
+            break;
+        case 'POST':
+            include 'create.php';
+            break;
+        case 'PUT':
+            include 'update.php';
+            break;
+        case 'DELETE':
+            include 'delete.php';
+            break;
+        default:
+            break;
+    }

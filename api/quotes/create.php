@@ -1,6 +1,8 @@
 <?php
     header('Access-Control-Allow-Origin: *');
     header('Content-Type: application/json');
+    header('Access-Control-Allow-Methods: POST');
+    header('Access-Control-Allow-Headers: Access-Control-Allow-Headers,Content-Type,Access-Control-Allow-,Authorization,X-Requested-With');
     $method = $_SERVER['REQUEST_METHOD'];
 
     if ($method === 'OPTIONS') {
@@ -9,4 +11,5 @@
         exit();
     }
 
-    
+    include_once '../../config/Database.php';
+    include_once '../../models/Quote.php';

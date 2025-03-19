@@ -9,4 +9,20 @@
         exit();
     }
 
-    
+    include_once '../../config/Database.php';
+    include_once '../../models/Author.php';
+
+    $database = new Database();
+    $db = $database->connect();
+
+    $author = new Author($db);
+
+    $result = $author->read();
+
+    if ($result) {
+        echo json_encode($result);
+    } else {
+        echo json_encode(
+            array('message' => 'Author not found')
+        );
+    }

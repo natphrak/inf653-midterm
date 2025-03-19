@@ -9,4 +9,20 @@
         exit();
     }
 
-    
+    include_once '../../config/Database.php';
+    include_once '../../models/Category.php';
+
+    $database = new Database();
+    $db = $database->connect();
+
+    $category = new Category($db);
+
+    $result = $category->read();
+
+    if ($result) {
+        echo json_encode($result);
+    } else {
+        echo json_encode(
+            array('message' => 'Category not found')
+        );
+    }
