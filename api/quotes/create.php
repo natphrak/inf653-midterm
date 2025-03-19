@@ -13,3 +13,27 @@
 
     include_once '../../config/Database.php';
     include_once '../../models/Quote.php';
+
+    $database = new Database();
+    $db = $database->connect();
+
+    $quote = new Quote($db);
+
+    // Get raw posted data
+    $data = json_decode(file_get_contents("php://input"));
+
+    if (isset($data->quote) && isset($data->author_id) && isset($data->category_id)) {
+        if ($quote->create($data->quote, $data->author_id, $data->category_id)) {
+            echo json_encode(
+                array('message' => 'Quote Created')
+            );
+        } else {
+            echo json_encode(
+                array('message' => 'Quote Not Created')
+            );
+        }
+    } else {
+        echo json_encode(
+            array('message' => 'Missing Required Parameters')
+        );
+    }

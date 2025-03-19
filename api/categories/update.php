@@ -24,8 +24,8 @@
 
     if (isset($data->id) && isset($data->category)) {
         $category->id = $data->id;
-        $category->name = $data->category;
-        if($category->update($category->id, $category->name)) {
+        $category->category = $data->category;
+        if($category->update($category->id, $category->category)) {
             echo json_encode(
                 array('message' => 'Category updated')
             );

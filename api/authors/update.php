@@ -24,8 +24,8 @@
 
     if (isset($data->id) && isset($data->author)) {
         $author->id = $data->id;
-        $author->name = $data->author;
-        if($author->update($author->id, $author->name)) {
+        $author->author = $data->author;
+        if($author->update($author->id, $author->author)) {
             echo json_encode(
                 array('message' => 'Author updated')
             );

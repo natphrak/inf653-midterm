@@ -6,8 +6,7 @@
 
         // Category properties
         public $id;
-        public $name;
-        public $bio;
+        public $category;
 
         // Constructor with DB
         public function __construct($db) {

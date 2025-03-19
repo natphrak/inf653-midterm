@@ -12,4 +12,29 @@
     }
 
     include_once '../../config/Database.php';
-    include_once '../../models/Delete.php';
+    include_once '../../models/Quote.php';
+
+    $database = new Database();
+    $db = $database->connect();
+
+    $quote = new Quote($db);
+
+    // Get raw posted data
+    $data = json_decode(file_get_contents("php://input"));
+
+    if (isset($data->id)) {
+        $quote->id = $data->id;
+        if($quote->delete($quote->id)) {
+            echo json_encode(
+                array('message' => 'Quote deleted')
+            );
+        } else {
+            echo json_encode(
+                array('message' => 'Quote not deleted')
+            );
+        }
+    } else {
+        echo json_encode(
+            array('message' => 'No Quotes Found')
+        );
+    }

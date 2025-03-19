@@ -6,8 +6,7 @@
 
         // Author properties
         public $id;
-        public $name;
-        public $bio;
+        public $author;
 
         // Constructor with DB
         public function __construct($db) {

@@ -12,8 +12,6 @@
     include_once '../../config/Database.php';
     include_once '../../models/Category.php';
 
-    $method = $_SERVER['REQUEST_METHOD'];
-
     switch ($method) {
         case 'GET':
             if (isset($_GET['id'])) {
