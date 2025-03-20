@@ -89,7 +89,7 @@
                     FROM " . $this->table . " q 
                     JOIN authors a ON q.author_id = a.id 
                     JOIN categories c ON q.category_id = c.id 
-                    WHERE id = :id";
+                    WHERE q.id = :id";
             // Prepare statement
             $stmt = $this->conn->prepare($query);
             // Bind
@@ -120,7 +120,12 @@
 
             // Execute query
             if ($stmt->execute()) {
-                return true;
+                return [
+                    "id" => $id,
+                    "quote" => $quote,
+                    "author_id" => $author_id,
+                    "category_id" => $category_id
+                ];
             }
 
             return false;

@@ -27,10 +27,11 @@
         $quote->quote = $data->quote;
         $quote->author_id = $data->author_id;
         $quote->category_id = $data->category_id;
-        if($quote->update($quote->id, $quote->quote, $quote->author_id, $quote->category_id)) {
-            echo json_encode(
-                array('message' => 'Quote updated')
-            );
+
+        $updatedQuote = $quote->update($quote->id, $quote->quote, $quote->author_id, $quote->category_id);
+
+        if($updatedQuote) {
+            echo json_encode($updatedQuote);
         } else {
             echo json_encode(
                 array('message' => 'Quote not updated')
