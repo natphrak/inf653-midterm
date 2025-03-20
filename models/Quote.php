@@ -27,7 +27,16 @@
             $stmt->bindParam(':category_id', $category_id);
             // Execute query
             if($stmt->execute()) {
-                return true;
+                // Get last inserted ID
+                $last_id = $this->conn->lastInsertId();
+
+                // then return quote information
+                return [
+                    "id" => $last_id,
+                    "quote" => $quote,
+                    "author_id" => $author_id,
+                    "category_id" => $category_id
+                ];
             }
             // Print error if something goes wrong
             printf("Error: %s. \n", $stmt->error);
@@ -66,13 +75,21 @@
             }
 
             $stmt->execute();
-            return $stmt->fetch(PDO::FETCH_ASSOC);
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
 
         // Read single
         public function read_single($id) {
             // Create query
-            $query = "SELECT id, quote FROM " . $this->table . " WHERE id = :id";
+            $query = "SELECT
+                        q.id,
+                        q.quote,
+                        a.author,
+                        c.category
+                    FROM " . $this->table . " q 
+                    JOIN authors a ON q.author_id = a.id 
+                    JOIN categories c ON q.category_id = c.id 
+                    WHERE id = :id";
             // Prepare statement
             $stmt = $this->conn->prepare($query);
             // Bind
@@ -80,7 +97,7 @@
             // Execute query
             $stmt->execute();
 
-            // Returns single quote with ID
+            // Returns single quote with ID, author, and category
             return $stmt->fetch(PDO::FETCH_ASSOC);
         }
 

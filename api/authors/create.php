@@ -23,10 +23,9 @@
     $data = json_decode(file_get_contents("php://input"));
 
     if (isset($data->author)) {
-        if ($author->create($data->author)) {
-            echo json_encode(
-                array('message' => 'Author Created')
-            );
+        $newAuthor = $author->create($data->author);
+        if ($newAuthor) {
+            echo json_encode($newAuthor);
         } else {
             echo json_encode(
                 array('message' => 'Author Not Created')
@@ -34,6 +33,6 @@
         }
     } else {
         echo json_encode(
-            array('message' => 'Error: Author required')
+            array('message' => 'Missing Required Parameters')
         );
     }

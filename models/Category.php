@@ -22,8 +22,13 @@
             // Bind
             $stmt->bindParam(':category', $category);
             // Execute query
-            if($stmt->execute()) {
-                return true;
+            if ($stmt->execute()) {
+                $last_id = $this->conn->lastInsertId();
+                
+                return [
+                    "id" => $last_id,
+                    "category" => $category
+                ];
             }
             // Print error if something goes wrong
             printf("Error: %s. \n", $stmt->error);

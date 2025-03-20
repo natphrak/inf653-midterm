@@ -23,10 +23,9 @@
     $data = json_decode(file_get_contents("php://input"));
 
     if (isset($data->quote) && isset($data->author_id) && isset($data->category_id)) {
-        if ($quote->create($data->quote, $data->author_id, $data->category_id)) {
-            echo json_encode(
-                array('message' => 'Quote Created')
-            );
+        $newQuote = $quote->create($data->quote, $data->author_id, $data->category_id);
+        if ($newQuote) {
+            echo json_encode($newQuote);
         } else {
             echo json_encode(
                 array('message' => 'Quote Not Created')

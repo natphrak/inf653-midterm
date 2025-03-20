@@ -23,7 +23,11 @@
             $stmt->bindParam(':author', $author);
             // Execute query
             if($stmt->execute()) {
-                return true;
+                $last_id = $this->conn->lastInsertId();
+                return [
+                    "id" => $last_id,
+                    "author" => $author
+                ];
             }
             // Print error if something goes wrong
             printf("Error: %s. \n", $stmt->error);
