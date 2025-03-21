@@ -32,7 +32,7 @@
             );
         } else {
             echo json_encode(
-                array('message' => 'Quote not deleted')
+                array('message' => 'No Quotes Found')
             );
         }
     } else {

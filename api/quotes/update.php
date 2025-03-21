@@ -34,7 +34,7 @@
             echo json_encode($updatedQuote);
         } else {
             echo json_encode(
-                array('message' => 'Quote not updated')
+                array('message' => 'No Quotes Found')
             );
         }
     } else {
