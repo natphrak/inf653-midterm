@@ -26,7 +26,7 @@
         $author->id = $data->id;
         if($author->delete($author->id)) {
             echo json_encode(
-                array('message' => 'Author deleted')
+                $author->id
             );
         } else {
             echo json_encode(

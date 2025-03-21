@@ -25,7 +25,7 @@
     if (isset($data->category)) {
         $newCategory = $category->create($data->category);
         if ($newCategory) {
-            echo json_encode($createdCategory);
+            echo json_encode($newCategory);
         } else {
             echo json_encode(
                 array('message' => 'Category Not Created')
