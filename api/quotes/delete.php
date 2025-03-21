@@ -26,7 +26,9 @@
         $quote->id = $data->id;
         if($quote->delete($quote->id)) {
             echo json_encode(
-                $quote->id
+                array(
+                    "id" => $quote->id,
+                )
             );
         } else {
             echo json_encode(

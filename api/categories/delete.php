@@ -26,7 +26,9 @@
         $category->id = $data->id;
         if($category->delete($category->id)) {
             echo json_encode(
-                $category->id
+                array(
+                    "id" => $category->id,
+                )
             );
         } else {
             echo json_encode(
